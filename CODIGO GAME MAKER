@@ -1,0 +1,25 @@
+var move_speed = 0.5;
+var player = instance_nearest(x, y, obj_player);
+
+if (player != noone) {
+    var _dx = player.x - x;
+    var _dy = player.y - y;
+
+    var distance = point_distance(x, y, player.x, player.y);
+
+    if (distance != 0) {
+        var move_x = move_speed * (_dx / distance);
+        var move_y = move_speed * (_dy / distance);
+
+        // Ajustar a direção para seguir o jogador
+        var h_direction = sign(_dx);
+        var v_direction = sign(_dy);
+
+        // Virar o inimigo para a direção correta
+        if (h_direction != image_xscale) {
+            image_xscale = h_direction;
+        }
+        x += move_x;
+        y += move_y;
+    }
+}
